@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+
+    <!--framelayout默认将控件放在左上角,
+    android:scaleType="centerCrop"按比例扩大图片的size居中显示-->
+    <ImageView
+        android:id="@+id/bing_pic_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+
+<!--    设置右边菜单栏的碎片-->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--设置列表下拉刷新视图-->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+                <!--滚动条-->
+                <ScrollView
+                    android:id="@+id/weather_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+    <!--            android:fitsSystemWindows="true"为系统状态栏融合在一起，并留有空间-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        android:orientation="vertical">
+
+                        <!--fitsSystemWindows表示 为系统状态栏留出空间-->
+
+                        <include layout="@layout/title" />
+
+                        <include layout="@layout/now" />
+
+                        <include layout="@layout/forecast" />
+
+                        <include layout="@layout/aqi" />
+
+                        <include layout="@layout/suggestion" />
+
+                    </LinearLayout>
+                </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--        设置遍历省市数据的碎片-->
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/choose_area_fragment"
+            android:name="com.example.coolweather.Activity.ChooseAreaFragment"
+            android:layout_gravity="start"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</FrameLayout>
