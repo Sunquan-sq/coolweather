@@ -5,6 +5,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -24,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.coolweather.R;
 import com.example.coolweather.gson.Forecast;
 import com.example.coolweather.gson.Weather;
+import com.example.coolweather.service.AutoUpdadteService;
 import com.example.coolweather.util.HttpUtil;
 import com.example.coolweather.util.Utility;
 
@@ -223,7 +225,7 @@ public class WeatherActivity extends AppCompatActivity {
     /**
      * 处理并展示Weather中的数据
      * */
-    private void showWeatherInfo(Weather weather) {
+    public void showWeatherInfo(Weather weather) {
 
         System.out.println("显示时的weather对象的信息展示："+weather);
         String cityName = weather.basic.cityName;
@@ -269,6 +271,9 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
-
+        //激活自动更新服务
+        Intent intent =new Intent(this, AutoUpdadteService.class);
+        startService(intent);
+        System.out.println("成功开启服务");
     }
 }
